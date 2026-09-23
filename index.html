@@ -1,0 +1,47 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<style>
+html,body {
+    margin:0;
+    background:transparent;
+    overflow:hidden;
+}
+
+#count {
+    padding:20px;
+    color:#f43f5e;
+    font:bold 80px/1 "Bebas Neue",sans-serif;
+    white-space:nowrap;
+}
+</style>
+</head>
+
+<body>
+
+<div id="count">Loading...</div>
+
+<script>
+async function update() {
+    try {
+        const data = await fetch("/count").then(r => r.json());
+
+        document.getElementById("count").textContent =
+            Number(data.subscribers).toLocaleString("en-US");
+    } catch {
+        document.getElementById("count").textContent = "—";
+    }
+}
+
+update();
+setInterval(update, 3000);
+</script>
+
+</body>
+</html>
+```
